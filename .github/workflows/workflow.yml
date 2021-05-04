@@ -1,0 +1,21 @@
+name: Rails tests
+on: [push]
+jobs:
+  rspec-test:
+    name: RSpec
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6.6
+      - name: Bundle installer
+        run: bundle install
+      - name: create db
+        run: rails db:create
+      - name: migrate db
+        run: rails db:migrate
+      - name: Run tests
+        run: bundle exec rspec
