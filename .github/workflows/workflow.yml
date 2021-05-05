@@ -19,3 +19,8 @@ jobs:
         run: rails db:migrate
       - name: Run tests
         run: bundle exec rspec
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
